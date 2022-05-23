@@ -6,7 +6,6 @@ Ad ogni refresh della pagina visualizzare una pubblicità a schermo, tenendo con
 
 <?php
 
-
 $ads = [
     [
         'image_path' => 'https://conversionsciences.com/wp-content/uploads/2019/04/example-of-emotional-logical-appeal-on-persuasive-copy.jpg',
@@ -34,46 +33,43 @@ $ads = [
         'is_active' => true,
     ],
 
-    $random_index = random_int(0,4)
-
 ];
+
+$active_ads = [];
+foreach ($ads as $key => $ads_value) { 
+
+        
+    if ($ads_value['is_active']) {
+        array_push($active_ads, $ads_value);
+    }
+};
+
+$random_number = random_int(0, count($active_ads) - 1);
+
+var_dump($random_number);
 
 ?>
 
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Snack 1</title>
 </head>
+
 <body>
+    <div style="text-align:center;" class="container">
+    <h3>Ads:</h3>
+    <a href="<?php echo $active_ads[$random_number]['link'] ?>">
+    <img width="300px" src="<?php echo $active_ads[$random_number]['image_path'] ?>" alt="">
+    </a>
+    <a style="display: block;" href="<?php echo $active_ads[$random_number]['link'] ?>"><?php echo $active_ads[$random_number]['link'] ?></a>
 
-    <?php foreach ($ads as $key => $ads_value) { ?>
+    </div>
 
-        <div>
-
-            <?php if ( $ads_value['is_active'] && $key === $random_index) {?>
-
-                <p>
-                <?php echo $ads_value['link']; ?>
-
-                </p>
-
-               
-                <img width="300px" src="<?php echo $ads_value['image_path']; ?>" alt="">
-                
-            
-                 <?php } ?>
-
-
-        </div>
-        
-        
-
-
-    <?php } ?>
-    
 </body>
+
 </html>
